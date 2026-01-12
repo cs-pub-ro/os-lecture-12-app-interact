@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  wordpress:
+    build: .
+    container_name: wp-single-container
+    ports:
+      - "8080:80"
+    volumes:
+      - wp-data:/var/www/html
+      - db-data:/var/lib/mysql
+    environment:
+      - DB_NAME=wordpress
+      - DB_USER=wp_user
+      - DB_PASS=wp_pass
+
+volumes:
+  wp-data:
+  db-data:

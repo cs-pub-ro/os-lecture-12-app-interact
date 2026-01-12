@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.6
+    container_name: wp-multi-db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wp_user
+      - MYSQL_PASSWORD=wp_pass
+      - MYSQL_ROOT_PASSWORD=root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp-network
+
+  wordpress:
+    image: wordpress:fpm
+    container_name: wp-multi-app
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wp_user
+      - WORDPRESS_DB_PASSWORD=wp_pass
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      - wp-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: wp-multi-web
+    restart: always
+    depends_on:
+      - wordpress
+    ports:
+      - "8081:80"
+    volumes:
+      - wp_data:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - wp-network
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  wp-network:
+    driver: bridge
