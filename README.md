@@ -58,7 +58,18 @@
 
 # 6. Table of Low-Level IPC Primitives
 
-- table head: primitive, primitive type (messaging, store, notification), speed, persistence, one-to-one or one-to-many, local or remote use
+| Primitive                  | Primitive Type          | Speed     | Persistence | One-to-one or One-to-many | Local or Remote Use |
+|----------------------------|-------------------------|-----------|-------------|---------------------------|---------------------|
+| Files                      | Store                   | Medium    | Yes         | One-to-many               | Local               |
+| Pipes                      | Messaging               | Fast      | No          | One-to-one                | Local               |
+| FIFOs (Named Pipes)        | Messaging               | Fast      | Yes         | One-to-one                | Local               |
+| Shared Memory              | Store                   | Very Fast | Yes         | One-to-many               | Local               |
+| Message Queues             | Messaging               | Moderate  | Yes         | One-to-many               | Local               |
+| Signals                    | Notification            | Very Fast | No          | One-to-one                | Local               |
+| Synchronization Primitives | Notification/Control    | Very Fast | No          | One-to-many               | Local               |
+| eventfd                    | Notification            | Very Fast | No          | One-to-one                | Local               |
+| Local-Domain Sockets       | Messaging               | Fast      | Yes         | One-to-one/One-to-many    | Local               |
+| Unix-Domain Sockets        | Messaging               | Fast      | Yes         | One-to-one/One-to-many    | Local               |
 
 # Conclusion and Takeaways
 
