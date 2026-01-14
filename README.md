@@ -65,11 +65,15 @@
 | FIFOs (Named Pipes)        | Messaging               | Fast      | Yes         | One-to-one                | Local               |
 | Shared Memory              | Store                   | Very Fast | Yes         | One-to-many               | Local               |
 | Message Queues             | Messaging               | Moderate  | Yes         | One-to-many               | Local               |
-| Signals                    | Notification            | Very Fast | No          | One-to-one                | Local               |
+| Signals (UNIX)             | Notification            | Very Fast | No          | One-to-one                | Local               |
 | Synchronization Primitives | Notification/Control    | Very Fast | No          | One-to-many               | Local               |
-| eventfd                    | Notification            | Very Fast | No          | One-to-one                | Local               |
+| eventfd (Linux)            | Notification            | Very Fast | No          | One-to-one                | Local               |
 | Local-Domain Sockets       | Messaging               | Fast      | Yes         | One-to-one/One-to-many    | Local               |
-| Unix-Domain Sockets        | Messaging               | Fast      | Yes         | One-to-one/One-to-many    | Local               |
+| Network Sockets            | Messaging               | Fast      | Yes         | One-to-one/One-to-many    | Remote              |
+| Memory Mapped Files        | Store                   | Very Fast | Yes         | One-to-many               | Local               |
+| Binder (Android/Linux)     | Messaging/RPC           | Fast      | No          | One-to-one/One-to-many    | Local               |
+| Mach Ports (macOS)         | Messaging               | Fast      | No          | One-to-one                | Local               |
+| ALPC (Windows)             | Messaging               | Very Fast | No          | One-to-one                | Local               |
 
 # Conclusion and Takeaways
 
